@@ -5,7 +5,7 @@ To facilitate the setup, we recommend creating a seperate environment and instal
 ```bash
 conda env create --file safeseal.yml
 ```
-## I. Experiments with our watermark
+## I. SafeSeal Watermarking
 All code related to our paper is located in the `src/` folder, and a sample text in json file in `data/` folder. Instructions are as below: 
 
 ### 1. Apply Watermark to the Original Text
@@ -41,22 +41,22 @@ You need to generate watermarked text for training our Watermark detector using 
 #### Step 2: Train the Watermark Detector
 
 To train the watermark detector, you need to run the `IPC_train.py` script. Modify the following parameters:
-- lrate = 1e-5 # Suggest to keep it as is
-- epoches_num = 10 # Suggest to keep it as is
-- batch_size = 32 # Suggest to keep it as is
-- base_model = "microsoft/deberta-base-mnli" # Suggest to keep it as is
-- short_name = "Deberta" # Suggest to keep it as is
-- test_file = "Yourfile.json", with Watermarked_output and Original_output columns.
-- train_file = "Yourfile.json", with Watermarked_output and Original_output columns.
+- `lrate` = 1e-5 # Suggest to keep it as is
+- `epoches_num` = 10 # Suggest to keep it as is
+- `batch_size` = 32 # Suggest to keep it as is
+- `base_model` = "microsoft/deberta-base-mnli" # Suggest to keep it as is
+- `short_name` = "Deberta" # Suggest to keep it as is
+- `test_file` = "Yourfile.json", with `Watermarked_output` and `Original_output` columns.
+- `train_file` = "Yourfile.json", with `Watermarked_output` and `Original_output` columns.
 
 #### Step 3: Detect Watermark
 To detect the watermark, you need to run the `IPC_test.py` script. Modify the following parameters:
-- IPC_dir = ""  # The directory where the trained model is saved
-- input_json = "File_to_test.json"  # Path to the input JSON file for evaluation
-- column ="Watermarked_output" # Column name to evaluate
-- output_csv = "Detection_LLama.csv"  # Path to save the predictions CSV
+- `IPC_dir` = ""  # The directory where the trained model is saved in Step 2.
+- `input_json` = "File_to_test.json"  # Path to the input JSON file for evaluation
+- `column` ="Watermarked_output" # Column name from input file to evaluate
+- `output_csv` = "Detection_LLama.csv"  # Path to save the predictions CSV
 
-Watermarked text will be return as 1 and non-watermark text as 0.
+**Note:** Watermarked text will be return as 1 and non-watermark text as 0.
 
 ## II. Other Watermark Implementation
 
@@ -64,12 +64,20 @@ We adhere to the original settings specified in their uploaded codes, allowing f
 - KGW: [KGW](https://github.com/jwkirchenbauer/lm-watermarking)
 - EXP: [EXP](https://github.com/jthickstun/watermark)
 - SIR: [SIR](https://github.com/THU-BPM/Robust_Watermark)
-- Semstamp: [SemStamp](https://github.com/bohanhou14/SemStamp)
+- SynthID: [SynthID](https://github.com/google-deepmind/synthid-text)
+- DTM: [DeepTextMark](https://github.com/tanvir097/DeepTextMark)
+- TW: [TW](https://github.com/Kiode/Text_Watermark)
 
-## III. Other experiments - Benchmarking Other Watermark Attacks
+
+## III. Other experiments - Watermark Removal Attacks
 To compare our attack with others, we used the following settings:
 - Dipper: [ai-detection-paraphrases](https://github.com/martiansideofthemoon/ai-detection-paraphrases/tree/main) (Parameters: `lex = 60`, `order = 60`)
 - Substitution Attack: [text_editor](https://github.com/THU-BPM/MarkLLM/blob/main/evaluation/tools/text_editor.py) (Parameter: `ratio = 0.7`).
-- Watermark Removal: [paraphrasing_attack](https://github.com/hlzhang109/impossibility-watermark)
+
+## IV. Other experiments - Evaluation Metrics
+To evaluate the performance of our watermarking method, we used the following metrics in folder `Evaluation_Metrics`:
+- BERTScore: `BERTscore_Eval.py`
+- Entity Similarity Score: `Entity_Similarity_Eval.py`
+
 
 Enjoy the code!
