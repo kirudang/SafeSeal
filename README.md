@@ -1,5 +1,5 @@
 
-# SafeSeal: Certifiable Watermarking for LLM Deployments
+# SafeSeal: Provable Watermarking for LLM Deployments
 ## Requirements
 To facilitate the setup, we recommend creating a seperate environment and installing the necessary packages from `safeseal.yml`. The simulations were conducted on Python version 3.9.20,using NVIDIA A100 GPU with PyTorch (torch 2.5.1) and CUDA 12.
 ```bash
@@ -67,6 +67,7 @@ We adhere to the original settings specified in their uploaded codes, allowing f
 - SynthID: [SynthID](https://github.com/google-deepmind/synthid-text)
 - DTM: [DeepTextMark](https://github.com/tanvir097/DeepTextMark)
 - TW: [TW](https://github.com/Kiode/Text_Watermark)
+- LW: [LW](https://github.com/xlhex/NLG_api_watermark)
 
 
 ## III. Other experiments - Watermark Removal Attacks
